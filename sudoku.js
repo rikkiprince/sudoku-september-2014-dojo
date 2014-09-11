@@ -25,7 +25,9 @@ function print(board) {
   var change = false;
   for(var i=0; i<board.length; i++) {
     for(var j=0; j<board[i].length; j++) {
-      if(typeof(board[i][j]) !== "object" && board[i][j] != origBoard[i][j]) {
+      if(typeof(board[i][j]) !== "object") {
+      
+      // board[i][j] != origBoard[i][j]) {
         change = true;
         out += " " + board[i][j];
       } else {
@@ -83,7 +85,7 @@ function solve(board, cb) {
           
           for(var i=sqRow; i<3+sqRow; i++) {
             for(var j=sqCol; j<3+sqCol; j++) {
-              if(i !== row && j !== col && typeof(board[i][j] === "number")) {
+              if(i !== row && j !== col && typeof(board[i][j]) === "number") {
                 board[row][col][board[i][j]-1] = false;
                 changed = true;
               }
