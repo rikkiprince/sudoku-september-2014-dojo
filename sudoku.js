@@ -20,12 +20,34 @@ var inputBoard = [[7, 0, 9, 5, 0, 0, 6, 0, 4]
                 ,[0, 0, 5, 0, 6, 2, 0, 9, 0]
                 ,[6, 0, 7, 0, 0, 8, 1, 0, 5]
                 ];
+/*/
+var origBoard = [[0, 0, 9, 0, 1, 6, 0, 0, 0]
+                ,[0, 0, 7, 0, 0, 0, 0, 0, 0]
+                ,[2, 0, 0, 9, 0, 8, 0, 0, 3]
+                ,[3, 7, 5, 0, 0, 1, 0, 0, 4]
+                ,[9, 0, 6, 8, 0, 4, 5, 0, 1]
+                ,[1, 0, 0, 2, 0, 0, 9, 3, 6]
+                ,[8, 0, 0, 5, 0, 9, 0, 0, 7]
+                ,[0, 0, 0, 0, 0, 0, 3, 0, 0]
+                ,[0, 0, 0, 3, 8, 0, 1, 0, 0]
+                ];
+var inputBoard = [[0, 0, 9, 0, 1, 6, 0, 0, 0]
+                ,[0, 0, 7, 0, 0, 0, 0, 0, 0]
+                ,[2, 0, 0, 9, 0, 8, 0, 0, 3]
+                ,[3, 7, 5, 0, 0, 1, 0, 0, 4]
+                ,[9, 0, 6, 8, 0, 4, 5, 0, 1]
+                ,[1, 0, 0, 2, 0, 0, 9, 3, 6]
+                ,[8, 0, 0, 5, 0, 9, 0, 0, 7]
+                ,[0, 0, 0, 0, 0, 0, 3, 0, 0]
+                ,[0, 0, 0, 3, 8, 0, 1, 0, 0]
+                ];
+//*/
 function print(board) {
   var out = "";
   var change = false;
   for(var i=0; i<board.length; i++) {
     for(var j=0; j<board[i].length; j++) {
-      if(typeof(board[i][j]) !== "object") {
+      if(typeof(board[i][j]) !== "object" && board[i][j] !== 0) {
       
       // board[i][j] != origBoard[i][j]) {
         change = true;
@@ -41,6 +63,8 @@ function print(board) {
 }
 
 function solve(board, cb) {
+  console.log("Starting board");
+  print(board);
   //arrayifyBoard(board);
   for(var i=0; i<board.length; i++) {
     for(var j=0; j<board[i].length; j++) {
@@ -54,10 +78,11 @@ function solve(board, cb) {
   var count = 0;
 
   while(changed) {
+    changed = false;
     //console.log(board[0]);
-    if(count > 50) break;
+    /*if(count > 50) break;
     count++;
-    print(board);
+    print(board);*/
     //console.log(board);
     for(var row=0; row<board.length; row++) {
       for(var col=0; col<board[row].length; col++) { 
@@ -102,7 +127,7 @@ function solve(board, cb) {
             }
           }
           if(numCount == 1) {
-            console.log("We found something");
+            //console.log("We found something");
             board[row][col] = num;
             changed = true;
           }
@@ -113,7 +138,10 @@ function solve(board, cb) {
     }
   }
   
+  //if(!boardIsSolved(board)) {
+  //
+  //}
   cb(board);
 }
 
-solve(inputBoard, function(a) {/*console.log(a)*/});
+solve(inputBoard, function(a) {console.log("Final board:");print(a)});
